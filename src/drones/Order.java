@@ -1,5 +1,6 @@
 package drones;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +12,10 @@ public class Order implements Comparable<Order> {
     Map<Integer, Integer> items = new HashMap<>();
     public int weight = 0;
     public boolean done;
-    public int x;
-    public int y;
+    public Point coordinates;
 
     public Order(int x, int y, Map<Integer, Integer> items) {
+        this.coordinates = new Point(x, y);
         this.x = x;
         this.y = y;
         this.items = items;
