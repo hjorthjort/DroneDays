@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mats on 11/02/16.
@@ -25,7 +27,7 @@ public class Delivery {
             line += 1;
 
             int numberOfProductTypes = Integer.parseInt(lines.get(line));
-            int[] weights = Arrays.stream(lines.get(line + 1).split(" ")).mapToInt(Integer::parseInt).toArray();
+            int[] productWeights = Arrays.stream(lines.get(line + 1).split(" ")).mapToInt(Integer::parseInt).toArray();
 
             line += 2;
 
@@ -33,10 +35,16 @@ public class Delivery {
 
             line += 1;
 
+            // warehouses
             for (int i = 0; i < numberOfWarehouses; i++) {
                 int x = Integer.parseInt(lines.get(line).split(" ")[0]);
                 int y = Integer.parseInt(lines.get(line).split(" ")[1]);
                 int[] warehouseStock = Arrays.stream(lines.get(line + 1).split(" ")).mapToInt(Integer::parseInt).toArray();
+
+                Warehouse warehouse = new Warehouse(x, y);
+                for (int j = 0; j < warehouseStock.length; j++) {
+                    warehouse.addItem(j, warehouseStock[j]);
+                }
 
                 line += 2;
             }
@@ -45,11 +53,26 @@ public class Delivery {
 
             line += 1;
 
+            // orders
             for (int i = 0; i < numberOfOrders; i++) {
                 int x = Integer.parseInt(lines.get(line).split(" ")[0]);
                 int y = Integer.parseInt(lines.get(line).split(" ")[1]);
                 int numberOfItems = Integer.parseInt(lines.get(line + 1));
                 int[] items = Arrays.stream(lines.get(line + 2).split(" ")).mapToInt(Integer::parseInt).toArray();
+                Arrays.sort(items);
+
+                // map from itemId to weight
+                Map<Integer, Integer> itemsMap = new HashMap<>();
+                for (int item : items) {
+                    if (itemsMap.containsKey(item)) {
+                        int count = itemsMap.get(item);
+                        count++;
+                        itemsMap.put(item, count);
+                    } else {
+                        itemsMap.put(item, 1);
+                    }
+                }
+                Order order = new Order(x, y, itemsMap);
 
                 line += 3;
             }
