@@ -20,12 +20,30 @@ public class Drone {
         StringBuilder sb = new StringBuilder();
         int loadedWeight = 0;
 
-        while (loadedWeight + Globals.orders.peek().weight < capacity) {
-            currentOrders.add(Globals.orders.poll());
+        while (loadedWeight + Globals.orders.peek().getWeight() < capacity) {
+            Order takenOrder = Globals.orders.poll();
+            currentOrders.add(takenOrder);
+            loadedWeight += takenOrder.getWeight();
         }
 
+        List<Warehouse> visited = new ArrayList<>();
+        Warehouse nextW = Globals.getClosestWarehouse(position);
+        while (!ordersDone()) {
+            fori
+            for (int i = 0; i < ; i++) {
 
+            }
+        }
 
         return sb.toString();
+    }
+
+    private boolean ordersDone() {
+        for (Order o : currentOrders) {
+            if (o.getWeight() != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
