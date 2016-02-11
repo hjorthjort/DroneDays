@@ -10,8 +10,9 @@ import java.util.Map;
 public class Warehouse {
     Map<Integer, Integer> items = new HashMap<>();
     Point coordinates;
+    int id;
 
-    Warehouse(int xCoord, int yCoord) {
+    Warehouse(int id, int xCoord, int yCoord) {
         coordinates = new Point(xCoord, yCoord);
     }
 

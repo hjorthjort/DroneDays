@@ -9,10 +9,11 @@ import java.util.List;
  */
 public class Drone {
     static int capacity;
+    int id;
     Point position;
     List<Order> currentOrders = new ArrayList<>();
 
-    public Drone(int xPos, int yPos) {
+    public Drone(int id, int xPos, int yPos) {
         position = new Point(xPos, yPos);
     }
 
@@ -29,9 +30,12 @@ public class Drone {
         List<Warehouse> visited = new ArrayList<>();
         Warehouse nextW = Globals.getClosestWarehouse(position);
         while (!ordersDone()) {
-            fori
-            for (int i = 0; i < ; i++) {
-
+            for (Order order : currentOrders) {
+                for (int i = 0; i < order.items.size(); i++) {
+                    if (nextW.items.containsKey(order.items.get(i))) {
+                        sb.append(id + " L " + nextW.id + " " + order.items.get(i) + " 1");
+                    }
+                }
             }
         }
 

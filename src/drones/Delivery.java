@@ -42,7 +42,7 @@ public class Delivery {
                 int y = Integer.parseInt(lines.get(line).split(" ")[1]);
                 int[] warehouseStock = Arrays.stream(lines.get(line + 1).split(" ")).mapToInt(Integer::parseInt).toArray();
 
-                Warehouse warehouse = new Warehouse(x, y);
+                Warehouse warehouse = new Warehouse(i, x, y);
                 for (int j = 0; j < warehouseStock.length; j++) {
                     warehouse.addItem(j, warehouseStock[j]);
                 }
@@ -55,6 +55,11 @@ public class Delivery {
             int numberOfOrders = Integer.parseInt(lines.get(line));
 
             line += 1;
+
+            //drones
+            for (int i = 0; i < numberOfDrones; i++) {
+                Globals.drones.add(i, new Drone(i, Globals.whs.get(0).coordinates.x, Globals.whs.get(0).coordinates.y));
+            }
 
             // orders
             for (int i = 0; i < numberOfOrders; i++) {
