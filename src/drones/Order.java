@@ -17,6 +17,10 @@ public class Order implements Comparable<Order> {
         this.x = x;
         this.y = y;
         this.items = items;
+
+        for (int weight : items.values()) {
+            this.weight += weight;
+        }
     }
 
     @Override
