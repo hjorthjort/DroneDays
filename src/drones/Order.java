@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author hjorthjort
  */
-public class Order {
+public class Order implements Comparable<Order> {
     Map<Integer, Integer> items = new HashMap<>();
     public int weight = 0;
     public boolean done;
@@ -17,5 +17,10 @@ public class Order {
         this.x = x;
         this.y = y;
         this.items = items;
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return o.weight - this.weight;
     }
 }

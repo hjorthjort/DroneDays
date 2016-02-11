@@ -1,13 +1,12 @@
 package drones;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author hjorthjort
  */
 public class Globals {
     static List<Warehouse> whs = new ArrayList<>();
-    static List<Order> orders = new ArrayList<>();
+    static PriorityQueue<Order> orders = new PriorityQueue<>();
     static List<Drone> drones = new ArrayList<>();
 }
