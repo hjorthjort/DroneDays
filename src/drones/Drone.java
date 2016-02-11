@@ -33,7 +33,7 @@ public class Drone {
             for (Order order : currentOrders) {
                 for (int i = 0; i < order.items.size(); i++) {
                     if (nextW.items.containsKey(order.items.get(i))) {
-                        sb.append(id + " L " + nextW.id + " " + order.items.get(i) + " 1");
+                        sb.append(id + " L " + nextW.id + " " + order.items.get(i) + " 1 ");
                     }
                 }
             }
