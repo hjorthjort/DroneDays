@@ -34,7 +34,7 @@ public class Order implements Comparable<Order> {
         return weight;
     }
 
-    public void take(int item) {
+    public void take(Integer item) {
         items.remove(item);
     }
 
