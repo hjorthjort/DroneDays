@@ -7,6 +7,7 @@ import java.util.Map;
  * @author hjorthjort
  */
 public class Order implements Comparable<Order> {
+    // map from item ID to count
     Map<Integer, Integer> items = new HashMap<>();
     public int weight = 0;
     public boolean done;
@@ -18,8 +19,8 @@ public class Order implements Comparable<Order> {
         this.y = y;
         this.items = items;
 
-        for (int weight : items.values()) {
-            this.weight += weight;
+        for (Map.Entry<Integer, Integer> entry : items.entrySet()) {
+            this.weight += Globals.productWeights[entry.getKey()] * entry.getValue();
         }
     }
 

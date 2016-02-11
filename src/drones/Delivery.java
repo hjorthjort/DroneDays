@@ -28,6 +28,7 @@ public class Delivery {
 
             int numberOfProductTypes = Integer.parseInt(lines.get(line));
             int[] productWeights = Arrays.stream(lines.get(line + 1).split(" ")).mapToInt(Integer::parseInt).toArray();
+            Globals.productWeights = productWeights;
 
             line += 2;
 
