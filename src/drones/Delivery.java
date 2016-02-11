@@ -64,18 +64,7 @@ public class Delivery {
                 int[] items = Arrays.stream(lines.get(line + 2).split(" ")).mapToInt(Integer::parseInt).toArray();
                 Arrays.sort(items);
 
-                // map from itemId to weight
-                Map<Integer, Integer> itemsMap = new HashMap<>();
-                for (int item : items) {
-                    if (itemsMap.containsKey(item)) {
-                        int count = itemsMap.get(item);
-                        count++;
-                        itemsMap.put(item, count);
-                    } else {
-                        itemsMap.put(item, 1);
-                    }
-                }
-                Order order = new Order(x, y, itemsMap);
+                Order order = new Order(x, y, items);
 
                 Globals.orders.add(order);
 

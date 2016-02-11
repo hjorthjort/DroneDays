@@ -1,34 +1,36 @@
 package drones;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.Point;
+import java.util.*;
 
 /**
  * @author hjorthjort
  */
 public class Order implements Comparable<Order> {
     // map from item ID to count
-    Map<Integer, Integer> items = new HashMap<>();
+    List<Integer> items;
     public boolean done;
     public Point coordinates;
 
-    public Order(int x, int y, Map<Integer, Integer> items) {
+    public Order(int x, int y, int[] items) {
         this.coordinates = new Point(x, y);
-        this.items = items;
-
+        this.items = new ArrayList<>();
+        for (int item : items) {
+            this.items.add(item);
+        }
     }
 
-    public void load(int item, int quant) {
-        int currentQ = items.get(item);
-        items.put(item, currentQ - quant);
+    public void load(int item) {
+        items.remove(item);
     }
 
     public int getWeight() {
         int weight = 0;
-        for (Map.Entry<Integer, Integer> entry : items.entrySet()) {
-            weight += Globals.productWeights[entry.getKey()] * entry.getValue();
+
+        for (int item : items) {
+            weight += Globals.productWeights[item];
         }
+
         return weight;
     }
 
