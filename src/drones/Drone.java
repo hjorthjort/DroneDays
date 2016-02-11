@@ -24,6 +24,8 @@ public class Drone {
             currentOrders.add(Globals.orders.poll());
         }
 
+
+
         return sb.toString();
     }
 }
