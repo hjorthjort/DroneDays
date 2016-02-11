@@ -16,8 +16,6 @@ public class Order implements Comparable<Order> {
 
     public Order(int x, int y, Map<Integer, Integer> items) {
         this.coordinates = new Point(x, y);
-        this.x = x;
-        this.y = y;
         this.items = items;
 
         for (Map.Entry<Integer, Integer> entry : items.entrySet()) {
