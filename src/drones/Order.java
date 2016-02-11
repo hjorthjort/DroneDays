@@ -34,6 +34,10 @@ public class Order implements Comparable<Order> {
         return weight;
     }
 
+    public void take(int item) {
+        items.remove(item);
+    }
+
     @Override
     public int compareTo(Order o) {
         return o.getWeight() - this.getWeight();
