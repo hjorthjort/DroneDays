@@ -47,6 +47,8 @@ public class Delivery {
                     warehouse.addItem(j, warehouseStock[j]);
                 }
 
+                Globals.whs.add(warehouse);
+
                 line += 2;
             }
 
@@ -74,6 +76,8 @@ public class Delivery {
                     }
                 }
                 Order order = new Order(x, y, itemsMap);
+
+                Globals.orders.add(order);
 
                 line += 3;
             }
