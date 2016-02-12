@@ -18,14 +18,16 @@ public class Globals {
         return Math.round(Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)));
     }
 
-    public static Warehouse getClosestWarehouse(Point position) {
+    public static Warehouse getClosestWarehouse(Point position, List<Warehouse> ignore) {
         Warehouse ret = whs.get(0);
         long shortest = distance(ret.coordinates, position);
         for (int i = 1; i < whs.size(); i++) {
-            long dist = distance(whs.get(i).coordinates, position);
-            if (dist < shortest) {
-                ret = whs.get(i);
-                shortest = dist;
+            if (!ignore.contains(whs.get(i))) {
+                long dist = distance(whs.get(i).coordinates, position);
+                if (dist < shortest) {
+                    ret = whs.get(i);
+                    shortest = dist;
+                }
             }
         }
         return ret;

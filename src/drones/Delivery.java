@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by mats on 11/02/16.
@@ -69,11 +67,15 @@ public class Delivery {
                 int[] items = Arrays.stream(lines.get(line + 2).split(" ")).mapToInt(Integer::parseInt).toArray();
                 Arrays.sort(items);
 
-                Order order = new Order(x, y, items);
+                Order order = new Order(i, x, y, items);
 
                 Globals.orders.add(order);
 
                 line += 3;
+            }
+
+            for (int i = 0; i < 100; i++) {
+                System.out.print(Globals.drones.get(0).commands());
             }
         } catch (IOException e) {
             e.printStackTrace();

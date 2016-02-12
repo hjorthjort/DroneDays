@@ -11,8 +11,9 @@ public class Order implements Comparable<Order> {
     List<Integer> items;
     public boolean done;
     public Point coordinates;
+    int id;
 
-    public Order(int x, int y, int[] items) {
+    public Order(int id, int x, int y, int[] items) {
         this.coordinates = new Point(x, y);
         this.items = new ArrayList<>();
         for (int item : items) {

@@ -1,7 +1,7 @@
 package drones;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,7 +11,7 @@ public class Drone {
     static int capacity;
     int id;
     Point position;
-    List<Order> currentOrders = new ArrayList<>();
+    Order currentOrder;
 
     public Drone(int id, int xPos, int yPos) {
         position = new Point(xPos, yPos);
@@ -19,35 +19,22 @@ public class Drone {
 
     public String commands() {
         StringBuilder sb = new StringBuilder();
-        int loadedWeight = 0;
-
-        while (loadedWeight + Globals.orders.peek().getWeight() < capacity) {
-            Order takenOrder = Globals.orders.poll();
-            currentOrders.add(takenOrder);
-            loadedWeight += takenOrder.getWeight();
-        }
-
-        List<Warehouse> visited = new ArrayList<>();
-        Warehouse nextW = Globals.getClosestWarehouse(position);
-        while (!ordersDone()) {
-            for (Order order : currentOrders) {
-                for (int i = 0; i < order.items.size(); i++) {
-                    if (nextW.items.containsKey(order.items.get(i))) {
-                        sb.append(id + " L " + nextW.id + " " + order.items.get(i) + " 1 ");
-                    }
+        Order order = Globals.orders.poll();
+        List<Warehouse> visited = new LinkedList<>();
+        while (order.getWeight() > 0) {
+            Warehouse closestW = Globals.getClosestWarehouse(position, visited);
+            for (int item : order.items) {
+                if (closestW.has(item)) {
+                    sb.append("L " + closestW.id + " " + item + " 1\n");
+                    closestW.take(item);
+                    order.take(item);
                 }
             }
+            visited.add(closestW);
         }
-
+        for (int item : order.items) {
+            sb.append("D " + order.id + " " + item + " 1\n");
+        }
         return sb.toString();
-    }
-
-    private boolean ordersDone() {
-        for (Order o : currentOrders) {
-            if (o.getWeight() != 0) {
-                return false;
-            }
-        }
-        return true;
     }
 }
